@@ -8,12 +8,16 @@ class MovieViewModel extends ChangeNotifier {
   List<Movie> _moviesPopular = []; 
   List<Movie> _filteredMoviesPopular = [];
   List<Movie> _moviesUpComing = []; 
-  List<Movie> _filteredMoviesUpComing = []; 
+  List<Movie> _filteredMoviesUpComing = [];
+  List<Movie> _moviesNow = []; 
+  List<Movie> _filteredMoviesNow = [];
+
   bool _isLoading = false;
   String? _error;
 
   List<Movie> get moviesPopular => _filteredMoviesPopular;
   List<Movie> get moviesUpComing => _filteredMoviesUpComing;
+  List<Movie> get moviesNow => _filteredMoviesNow;
 
 
   bool get isLoading => _isLoading;
@@ -43,6 +47,23 @@ Future<void> fetchMoviesUpComing() async {
     try {
       _moviesUpComing = await _service.fetchUpComingMovies();
       _filteredMoviesUpComing = _moviesUpComing;
+      _error = null;
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
+  Future<void> fetchMoviesNow() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _moviesNow = await _service.fetchNowMovies();
+      _filteredMoviesNow = _moviesNow;
       _error = null;
     } catch (e) {
       _error = e.toString();

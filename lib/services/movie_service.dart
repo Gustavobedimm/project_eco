@@ -32,4 +32,17 @@ Future<List<Movie>> fetchUpComingMovies() async {
       throw Exception('Erro ao carregar filmes');
     }
   }
+  Future<List<Movie>> fetchNowMovies() async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/movie/now_playing?api_key=$_apiKey&language=pt-BR'),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final List movies = data['results'];
+      return movies.map((json) => Movie.fromJson(json)).toList();
+    } else {
+      throw Exception('Erro ao carregar filmes');
+    }
+  }
 }

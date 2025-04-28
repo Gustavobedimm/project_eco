@@ -20,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Future.microtask(() {
       Provider.of<MovieViewModel>(context, listen: false).fetchMoviesPopular();
       Provider.of<MovieViewModel>(context, listen: false).fetchMoviesUpComing();
+      Provider.of<MovieViewModel>(context, listen: false).fetchMoviesNow();
     });
   }
 
@@ -44,6 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
             child: MovieList(
               title: 'Os mais populares',
               movies: viewModelMovie.moviesPopular,
+            ),
+          ),
+          SizedBox(
+            height: 290,
+            child: MovieList(
+              title: 'Agora nos cinemas',
+              movies: viewModelMovie.moviesNow,
             ),
           ),
           SizedBox(

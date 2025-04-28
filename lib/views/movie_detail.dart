@@ -25,6 +25,16 @@ class MovieDetail extends StatelessWidget {
                   ? Image.network(
                     'https://image.tmdb.org/t/p/w500${movie.imgPath}',
                     fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Container(
+                        height: 200,
+                        color: Colors.black,
+                        child: const Center(child: CircularProgressIndicator()),
+                      );
+                    },
                   )
                   : Container(height: 200, color: Colors.grey),
               SizedBox(height: 16),
