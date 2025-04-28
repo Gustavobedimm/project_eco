@@ -5,22 +5,27 @@ import '../services/movie_service.dart';
 class MovieViewModel extends ChangeNotifier {
   final MovieService _service = MovieService();
 
-  List<Movie> _movies = []; // Todos os filmes (completos)
-  List<Movie> _filteredMovies = []; // Filmes filtrados
+  List<Movie> _moviesPopular = []; 
+  List<Movie> _filteredMoviesPopular = [];
+  List<Movie> _moviesUpComing = []; 
+  List<Movie> _filteredMoviesUpComing = []; 
   bool _isLoading = false;
   String? _error;
 
-  List<Movie> get movies => _filteredMovies;
+  List<Movie> get moviesPopular => _filteredMoviesPopular;
+  List<Movie> get moviesUpComing => _filteredMoviesUpComing;
+
+
   bool get isLoading => _isLoading;
   String? get error => _error;
 
-  Future<void> fetchMovies() async {
+  Future<void> fetchMoviesPopular() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _movies = await _service.fetchPopularMovies();
-      _filteredMovies = _movies;
+      _moviesPopular = await _service.fetchPopularMovies();
+      _filteredMoviesPopular = _moviesPopular;
       _error = null;
     } catch (e) {
       _error = e.toString();
@@ -30,12 +35,33 @@ class MovieViewModel extends ChangeNotifier {
     }
   }
 
+
+Future<void> fetchMoviesUpComing() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _moviesUpComing = await _service.fetchUpComingMovies();
+      _filteredMoviesUpComing = _moviesUpComing;
+      _error = null;
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
+
+
   void filterMoviesByGenre(int genreId) {
     if (genreId == 0) {
-      _filteredMovies = _movies;
+      _filteredMoviesPopular = _moviesPopular;
+      _filteredMoviesUpComing = _moviesUpComing;
     } else {
-      _filteredMovies =
-          _movies.where((movie) => movie.genreIds.contains(genreId)).toList();
+      _filteredMoviesPopular = _moviesPopular.where((movie) => movie.genreIds.contains(genreId)).toList();
+      _filteredMoviesUpComing = _moviesUpComing.where((movie) => movie.genreIds.contains(genreId)).toList();
     }
     notifyListeners();
   }

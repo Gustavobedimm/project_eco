@@ -18,7 +18,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieViewModel>(context, listen: false).fetchMovies();
+      Provider.of<MovieViewModel>(context, listen: false).fetchMoviesPopular();
+      Provider.of<MovieViewModel>(context, listen: false).fetchMoviesUpComing();
     });
   }
 
@@ -42,17 +43,25 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 290,
             child: MovieList(
               title: 'Os mais populares',
-              movies: viewModelMovie.movies,
+              movies: viewModelMovie.moviesPopular,
             ),
           ),
           SizedBox(
             height: 290,
             child: MovieList(
-              title: 'Recomendados',
-              movies: viewModelMovie.movies,
+              title: 'Em breve nos cinemas',
+              movies: viewModelMovie.moviesUpComing,
+            ),
+          ),
+          SizedBox(
+            height: 290,
+            child: MovieList(
+              title: 'Em breve nos cinemas',
+              movies: viewModelMovie.moviesUpComing,
             ),
           ),
         ],
+        
       ),
     );
   }
