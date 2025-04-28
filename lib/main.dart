@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF1f1f2b)),
 
       ),
-      home: const MyHomePage(title: 'Home'),
+      home: const MyHomePage(title: 'Inicio'),
     );
   }
 }

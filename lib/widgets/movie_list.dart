@@ -13,7 +13,27 @@ class MovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     
     if (movies.isEmpty) {
-      return SizedBox.shrink(); 
+      return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  
+                ),
+              ),
+          ],
+        ),
+        SizedBox(height: 8),
+        SizedBox(
+          height: 240,
+          child: Center(child: Text("Nenhum filme encontrado." , style: TextStyle(color: Colors.white),),),
+        ),
+      ]);
     }
     return Column(
       children: [

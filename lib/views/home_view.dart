@@ -53,13 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               movies: viewModelMovie.moviesUpComing,
             ),
           ),
-          SizedBox(
-            height: 290,
-            child: MovieList(
-              title: 'Em breve nos cinemas',
-              movies: viewModelMovie.moviesUpComing,
-            ),
-          ),
+          
         ],
         
       ),
