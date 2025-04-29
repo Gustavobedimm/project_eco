@@ -80,9 +80,20 @@ Future<void> fetchMoviesUpComing() async {
     if (genreId == 0) {
       _filteredMoviesPopular = _moviesPopular;
       _filteredMoviesUpComing = _moviesUpComing;
+      _filteredMoviesNow = _moviesNow;
     } else {
       _filteredMoviesPopular = _moviesPopular.where((movie) => movie.genreIds.contains(genreId)).toList();
       _filteredMoviesUpComing = _moviesUpComing.where((movie) => movie.genreIds.contains(genreId)).toList();
+      _filteredMoviesNow = _moviesNow.where((movie) => movie.genreIds.contains(genreId)).toList();
+    }
+    notifyListeners();
+  }
+
+  void filterMoviesText(String text) {
+    if(text.isNotEmpty){
+      _filteredMoviesPopular = _moviesPopular.where((movie) => movie.title.contains(text)).toList();
+    }else{
+      _filteredMoviesPopular = _moviesPopular;  
     }
     notifyListeners();
   }

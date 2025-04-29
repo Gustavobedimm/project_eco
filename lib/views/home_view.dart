@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_eco/viewmodels/movie_viewmodel.dart';
 import 'package:project_eco/widgets/genre_filter.dart';
 import 'package:project_eco/widgets/movie_list.dart';
+import 'package:project_eco/widgets/movie_search.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -38,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
+          SearchMovie(),
+          SizedBox(height: 16),
           GenreFilter(),
           SizedBox(height: 16),
           SizedBox(
