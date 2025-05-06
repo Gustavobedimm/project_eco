@@ -13,7 +13,9 @@ class GenreService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final List genres = data['genres'];
-      return genres.map((json) => Genre.fromJson(json)).toList();
+      final List<Genre> genreList = genres.map((json) => Genre.fromJson(json)).toList();
+      genreList.insert(0, Genre(id: 0, name: "Todos"));
+      return genreList;
     } else {
       throw Exception('Erro ao carregar filmes');
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_eco/viewmodels/movie_viewmodel.dart';
-import 'package:provider/provider.dart';
+//import 'package:project_eco/viewmodels/movie_viewmodel.dart';
+//import 'package:provider/provider.dart';
 
 class SearchMovie extends StatefulWidget {
   const SearchMovie({super.key});
@@ -14,7 +14,7 @@ class _SearchMovieState extends State<SearchMovie> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModelMovie = Provider.of<MovieViewModel>(context);
+    //final viewModelMovie = Provider.of<MovieViewModel>(context);
 
     return Column(
       children: [
@@ -27,7 +27,7 @@ class _SearchMovieState extends State<SearchMovie> {
             suffixIcon: Icon(Icons.search),
             border: OutlineInputBorder(),
           ),
-          onChanged: viewModelMovie.filterMoviesText,
+          onChanged: null//viewModelMovie.filterMoviesText,
         ),
       ],
     );
